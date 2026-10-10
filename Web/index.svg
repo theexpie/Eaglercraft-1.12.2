@@ -9,6 +9,7 @@
       </head>
       <body id="game_frame">
         <script type="text/javascript">
+          <![CDATA[
           "use strict";
           
           // Load scripts dynamically
@@ -70,6 +71,7 @@
           } else {
             initEaglercraft();
           }
+          ]]>
         </script>
       </body>
     </html>
