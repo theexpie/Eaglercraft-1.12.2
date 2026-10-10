@@ -1,1 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100">
+  <script type="text/javascript">
+    <![CDATA[
+      "use strict";
+      window.addEventListener("load", () => {
+        if(document.location.href.startsWith("file:")) {
+          alert("HTTP please, do not open this file locally, run a local HTTP server and load it via HTTP");
+        } else {
+          const relayId = Math.floor(Math.random() * 3);
+          window.eaglercraftXOpts = {
+            demoMode: false,
+            container: "game_frame",
+            assetsURI: "https://cdn.jsdelivr.net/gh/theexpie/Eaglercraft-1.12.2@main/Web/assets.epk",
+            localesURI: "https://cdn.jsdelivr.net/gh/theexpie/Eaglercraft-1.12.2@main/Web/lang/",
+            worldsDB: "worlds",
+            logInvalidCerts: true,
+            servers: [
+              { addr: "ws://localhost:8081/", name: "Local test server" }
+            ],
+            relays: [
+              { addr: "wss://relay.deev.is/", comment: "lax1dude relay #1", primary: relayId == 0 },
+              { addr: "wss://relay.lax1dude.net/", comment: "lax1dude relay #2", primary: relayId == 1 },
+              { addr: "wss://relay.shhnowisnottheti.me/", comment: "ayunami relay #1", primary: relayId == 2 }
+            ]
+          };
+          
+          var q = window.location.search;
+          if(typeof q === "string" && q.startsWith("?")) {
+            q = new URLSearchParams(q);
+            var s = q.get("server");
+            if(s) window.eaglercraftXOpts.joinServer = s;
+          }
+          
+          main();
+        }
+      });
+
+      // Load your scripts dynamically
+      const scripts = [
+        "https://cdn.jsdelivr.net/gh/theexpie/Eaglercraft-1.12.2@main/Web/ModAPI.js",
+        "https://cdn.jsdelivr.net/gh/theexpie/Eaglercraft-1.12.2@main/Web/ModLoader.js",
+        "https://cdn.jsdelivr.net/gh/theexpie/Eaglercraft-1.12.2@main/Web/ModGUI.js",
+        "https://cdn.jsdelivr.net/gh/theexpie/Eaglercraft-1.12.2@main/Web/anvil.js",
+        "https://cdn.jsdelivr.net/gh/theexpie/Eaglercraft-1.12.2@main/Web/classes.js"
+      ];
+      
+      scripts.forEach(src => {
+        const script = document.createElement("script");
+        script.src = src;
+        document.head.appendChild(script);
+      });
+    ]]>
+  </script>
+</svg>
